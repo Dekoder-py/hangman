@@ -1,33 +1,43 @@
-from rich import print
-from random import choice
 import os
+from random import choice
+from time import sleep
+
+from rich import print
 
 WORD_LIST = ["summer", "hack"]
 
+
 def clear_screen():
-    if os.name == 'nt': # windows
-        _ = os.system('cls')
-    else: # macOS and linux
-        _ = os.system('clear')
+    if os.name == "nt":  # windows
+        _ = os.system("cls")
+    else:  # macOS and linux
+        _ = os.system("clear")
+
 
 def game():
     word = choice(WORD_LIST)
     guesses = 0
-    print(f"[b]The word is {len(word)} letters long.[/b]")
     while guesses < 10:
+        print(f"[b]The word is {len(word)} letters long.[/b]")
+        print(f"You have {10 - guesses} guesses remaining.")
         guess = input("Guess: ").lower().strip()
         if guess == word:
             print("[green]You Win![/green]")
+            print(f"The word was {word}")
             quit(0)
         else:
             print("Wrong.")
             guesses += 1
-            print(f"You have {10 - guesses} guesses remaining.")
+            print(f"[red]You have {10 - guesses} guesses remaining.[/red]")
+            sleep(3)
             clear_screen()
+
 
 def main():
     clear_screen()
-    print("Welcome to hangman! Guess the word in less than 10 guesses or [red]you'll perish[/red]")
+    print(
+        "Welcome to hangman! Guess the word in less than 10 guesses or [red]you'll perish[/red]"
+    )
     game()
 
 
