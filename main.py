@@ -1,7 +1,7 @@
 import os
 from random import choice
 from time import sleep
-
+from hangmans import ASCII_ART
 from rich import print
 
 WORD_LIST = ["summer", "hack"]
@@ -31,6 +31,8 @@ def game():
             print(f"[red]You have {10 - guesses} guesses remaining.[/red]")
             sleep(3)
             clear_screen()
+        print(ASCII_ART[guesses-1])
+    print(f"[red]You lost.[/red] The word was [b]{word}[/b]")
 
 
 def main():
